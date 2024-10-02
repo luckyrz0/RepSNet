@@ -50,7 +50,7 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 
 ## 数据准备
 
-1. 下载 CoNIC 数据集 ([CoNIC](https://conic-challenge.grand-challenge.org/)) 并放置在 `datasets` 目录下:
+1. 下载 CoNIC 数据集 ([CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) 并放置在 `datasets` 目录下:
     ```
    dataset/
             └── CoNIC/
