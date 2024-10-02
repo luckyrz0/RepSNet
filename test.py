@@ -1,4 +1,4 @@
-from models.RepSNet_v1 import RepSNet_v1, model_convert
+from models.RepSNet_v1 import RepSNet, model_convert
 import numpy as np
 import torch
 
@@ -7,8 +7,8 @@ torch.set_grad_enabled(False)
 
 def inference():
     result = []
-    images = np.load("images.npy")
-    model = RepSNet_v1(deploy=True).to("cuda")
+    images = np.load("/dataset/CoNIC/test/images.npy")
+    model = RepSNet(deploy=True).to("cuda")
     model.load_state_dict(torch.load("/model_log/model.pkl"))
     model.eval()
     images = torch.from_numpy(images).permute(0, 3, 1, 2).contiguous()

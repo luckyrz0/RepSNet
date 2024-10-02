@@ -88,6 +88,16 @@ The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S
     python test.py
     ```
 
+<!-- ## Quantitative Results
+
+| Method     | AJI | DICE | PQ | mPQ  |
+|--------------|------|------|-----|------|
+| U-Net      | 0.518 | 0.800 | 0.505 | 0.411 |
+| DCAN       | 0.636 | 0.815 | 0.590 | 0.480 |
+| Hover-Net       | 0.663 | 0.830 | 0.628 | 0.531 |
+| StarDist       | 0.671 | 0.837 | 0.634 | 0.547 |
+| RepSNet       | 0.683 | 0.841 | 0.641 | 0.563 | -->
+
 ## Qualitative Results
 
 ![RepSNet Qualitative Results1](/results/Qualitative_analysis1.png)
