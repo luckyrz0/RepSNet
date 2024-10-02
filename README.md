@@ -22,10 +22,10 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 
 ## Test performance
 
-| Dataset      | AJI | DICE | PQ | mPQ  |
+| Test set      | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
-| local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
-| online_test  | - | - | 0.635 | 0.478  |
+| local test set  | 0.672 | 0.837 | 0.641 | 0.539 |
+| online test set | - | - | 0.635 | 0.478  |
 
 - **AJI**: 聚合 Jaccard 指数，评估分割与真实分割的重叠度。  
 - **DICE**: Dice 系数，衡量分割与真实分割的相似度。 
@@ -60,7 +60,14 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 
 下载以下预训练模型，并将其放置在 `model_log/` 文件夹下：
 
-- [RepSNet 模型](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
+<!-- | Test         | AJI | DICE | PQ | mPQ  |
+|--------------|------|------|-----|------|
+| local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
+| local_test   | - | - | 0.635 | 0.478  | -->
+
+The RepSNet_lager model 'best_mpq_lager.pth' can be downloaded here: [RepSNet_L](https://drive.google.com/file/d/1082dGUDeGQQwiOxylXmgU5ueArpGs2Ib/view?usp=sharing)
+
+The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
 
 ## 训练
 
@@ -93,7 +100,8 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 
 ```bibtex
 @article{zhang2020fairmot,
-  title={FairMOT: On the Fairness of Detection and Re-Identification in Multiple Object Tracking},
+  title={RepSNet: A Nucleus Instance Segmentation model based on
+Boundary Regression and Structural Re-parameterization},
   author={Zhang, Yifu and Wang, Changhong and Wang, Xiaogang and Liu, Wei},
   journal={arXiv preprint arXiv:2004.01888},
   year={2020}
