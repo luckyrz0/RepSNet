@@ -9,7 +9,7 @@ def inference():
     result = []
     images = np.load("images.npy")
     model = RepSNet_v1(deploy=True).to("cuda")
-    model.load_state_dict(torch.load("/opt/algorithm/data/model.pkl"))
+    model.load_state_dict(torch.load("/model_log/model.pkl"))
     model.eval()
     images = torch.from_numpy(images).permute(0, 3, 1, 2).contiguous()
     for batch in images.split(4):

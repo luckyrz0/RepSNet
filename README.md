@@ -2,52 +2,58 @@
 
 **Paper**: RepSNet: A Nucleus Instance Segmentation model based on Boundary Regression and Structural Re-parameterization<!-- (https://arxiv.org/abs/2004.01888) -->
 
-## Abstract
+RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密集粘连实例分割的挑战。通过使用共享的特征提取网络，RepSNet在保持高效分割的同时，实现了细胞核分类的高精度。
+
+## Pipeline
+
+![RepSNet Pipeline](/assets/image.png)
 
 
-## Model
+<!-- FairMOT 使用了 DLA-34 作为 backbone，同时为检测和 Re-ID 任务提供了统一的特征表示。网络结构如下图所示：
+![RepSNet Pipeline](/assets/model_structure.png)
+1. DLA-34 backbone
+2. Shared head for detection and Re-ID
+3. Multi-scale feature fusion for fairness -->
 
+<!-- ## 更新记录
 
-## 训练表现
+- 2020/04/22: 发布了 FairMOT 初版代码
+- 2020/06/10: 更新了自定义挑战数据集上的性能表现 -->
 
-| Dataset      | MOTA | IDF1 | IDs | FPS  |
+## Test performance
+
+| Dataset      | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
-| MOT17        | 74.9 | 72.8 | 312 | 30   |
-| MOT20        | 74.5 | 71.9 | 322 | 25   |
+| local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
+| online_test  | - | - | 0.635 | 0.478  |
 
-- **MOTA**: 多目标跟踪准确率  
-- **IDF1**: 识别 F1 得分  
-- **IDs**: 身份转换次数  
-- **FPS**: 每秒帧数
+- **AJI**: 聚合 Jaccard 指数，评估分割与真实分割的重叠度。  
+- **DICE**: Dice 系数，衡量分割与真实分割的相似度。 
+- **PQ**: 全景质量，结合分割和检测的准确性。  
+- **mPQ**: 平均全景质量，评估多个类别的平均分割性能。
 
 ## 安装步骤
 
 1. 克隆仓库并安装依赖：
     ```bash
-    git clone https://github.com/ifzhang/FairMOT.git
-    cd FairMOT
+    git clone https://github.com/luckyrz0/RepSNet.git
+    cd RepSNet
     pip install -r requirements.txt
     ```
 
-2. 编译 DLA 模型：
+<!-- 2. 编译 DLA 模型：
     ```bash
     cd src/lib/models/networks
     sh make.sh
     cd ../../../
-    ```
+    ``` -->
 
 ## 数据准备
 
-1. 下载 MOT 数据集 (如 [MOT17](https://motchallenge.net/data/MOT17/)) 并放置在 `datasets` 目录下:
+1. 下载 CoNIC 数据集 ([CoNIC](https://conic-challenge.grand-challenge.org/)) 并放置在 `datasets` 目录下:
     ```
-    FairMOT/
-      └── datasets/
-            └── MOT17/
-    ```
-
-2. 转换数据集格式以适应训练：
-    ```bash
-    python src/tools/convert_mot17_to_coco.py
+   dataset/
+            └── CoNIC/
     ```
 
 ## 预训练模型
