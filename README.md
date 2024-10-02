@@ -2,8 +2,8 @@
 
 **Paper**: RepSNet: A Nucleus Instance Segmentation model based on Boundary Regression and Structural Re-parameterization<!-- (https://arxiv.org/abs/2004.01888) -->
 
-RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密集粘连实例分割的挑战。通过使用共享的特征提取网络，RepSNet在保持高效分割的同时，实现了细胞核分类的高精度。
-
+<!-- RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密集粘连实例分割的挑战。通过使用共享的特征提取网络，RepSNet在保持高效分割的同时，实现了细胞核分类的高精度。 -->
+RepSNet proposes a simple and effective method for nucleus instance segmentation, addressing the challenges of dense and overlapping instance segmentation. By utilizing a shared encoder, RepSNet achieves high segmentation efficiency while maintaining high accuracy in nucleus classification.
 ## Pipeline
 
 ![RepSNet Pipeline](/assets/image.png)
@@ -27,14 +27,18 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 | local test set  | 0.672 | 0.837 | 0.641 | 0.539 |
 | online test set | - | - | 0.635 | 0.478  |
 
-- **AJI**: 聚合 Jaccard 指数，评估分割与真实分割的重叠度。  
+**AJI**: Aggregated Jaccard Index, assesses the overlap between the segmentation and ground truth.  
+**DICE**: Dice Coefficient, measures the similarity between the segmentation and ground truth.  
+**PQ**: Panoptic Quality, combines segmentation and detection accuracy.  
+**mPQ**: Mean Panoptic Quality, evaluates the average segmentation performance across multiple categories.
+<!-- - **AJI**: 聚合 Jaccard 指数，评估分割与真实分割的重叠度。  
 - **DICE**: Dice 系数，衡量分割与真实分割的相似度。 
 - **PQ**: 全景质量，结合分割和检测的准确性。  
-- **mPQ**: 平均全景质量，评估多个类别的平均分割性能。
+- **mPQ**: 平均全景质量，评估多个类别的平均分割性能。 -->
 
-## 安装步骤
+## Installation
 
-1. 克隆仓库并安装依赖：
+1. Clone the repository and install dependencies:
     ```bash
     git clone https://github.com/luckyrz0/RepSNet.git
     cd RepSNet
@@ -48,18 +52,19 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
     cd ../../../
     ``` -->
 
-## 数据准备
+## Data preparation
 
-1. 下载 CoNIC 数据集 ([CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) 并放置在 `datasets` 目录下:
+<!-- 1. 下载 CoNIC 数据集 ([CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) 并放置在 `datasets` 目录下: -->
+1. Download the CoNIC([download CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) dataset and place it in the datasets directory.
     ```
    dataset/
             └── CoNIC/
     ```
 
-## 预训练模型
+## Pretrained models
 
-下载以下预训练模型，并将其放置在 `model_log/` 文件夹下：
-
+<!-- 下载以下预训练模型，并将其放置在 `model_log/` 文件夹下： -->
+Download the following pre-trained models and place them in the `model_log/` folder:
 <!-- | Test         | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
 | local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
@@ -69,21 +74,24 @@ The RepSNet_lager model 'best_mpq_lager.pth' can be downloaded here: [RepSNet_L]
 
 The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
 
-## 训练
+## Train
 
-1. 使用默认参数训练 RepSNet 模型：
+<!-- 1. 使用默认参数训练 RepSNet 模型： -->
+1. Train the RepSNet model using default parameters：
     ```bash
     python train.py
     ```
 
-2. 可通过以下命令查看更多训练参数：
+<!-- 2. 可通过以下命令查看更多训练参数： -->
+2. You can view more training parameters with the following command：
     ```bash
     python train.py --help
     ```
 
-## 测试
+## Test
 
-1. 在 CoNIC 数据集上进行测试：
+<!-- 1. 在 CoNIC 数据集上进行测试： -->
+1. Test the RepSNet model using default parameters：
     ```bash
     python test.py
     ```
@@ -98,15 +106,16 @@ The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S
 | StarDist       | 0.671 | 0.837 | 0.634 | 0.547 |
 | RepSNet       | 0.683 | 0.841 | 0.641 | 0.563 | -->
 
-## Qualitative Results
+## Qualitative results
 
 ![RepSNet Qualitative Results1](/results/Qualitative_analysis1.png)
 
 ![RepSNet Qualitative Results1](/results/Qualitative_analysis2.png)
 
-## 引用
+## Citation
 
-如果你在研究中使用了我们的工作，请引用以下论文：
+<!-- 如果你在研究中使用了我们的工作，请引用以下论文： -->
+If you use our work in your research, please cite the following paper:
 
 ```bibtex
 @article{zhang2020fairmot,
