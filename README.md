@@ -58,49 +58,34 @@ RepSNet 提出了一种简单有效的细胞核实例分割方法，缓解了密
 
 ## 预训练模型
 
-下载以下预训练模型，并将其放置在 `models/` 文件夹下：
+下载以下预训练模型，并将其放置在 `model_log/` 文件夹下：
 
-- [DLA-34 模型](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
-- [FairMOT 模型](https://github.com/ifzhang/FairMOT/releases/download/v1.0/fairmot.pth)
+- [RepSNet 模型](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
 
 ## 训练
 
-1. 使用默认参数训练 FairMOT 模型：
+1. 使用默认参数训练 RepSNet 模型：
     ```bash
-    python src/train.py mot --exp_id fairmot_dla34 --gpus 0
+    python train.py
     ```
 
 2. 可通过以下命令查看更多训练参数：
     ```bash
-    python src/train.py --help
+    python train.py --help
     ```
 
 ## 测试
 
-1. 在 MOT17 数据集上进行跟踪测试：
+1. 在 CoNIC 数据集上进行测试：
     ```bash
-    python src/track.py mot --load_model ../models/fairmot.pth --conf_thres 0.4
+    python test.py
     ```
 
-2. 结果将保存到 `results/` 文件夹中。
+## Qualitative Results
 
-## Demo 演示
+![RepSNet Qualitative Results1](/results/Qualitative_analysis1.png)
 
-1. 使用预训练模型进行视频跟踪：
-    ```bash
-    python demo.py --input_video path_to_video.mp4 --load_model ../models/fairmot.pth
-    ```
-
-2. 结果将输出到 `results/` 文件夹中。
-
-## 自定义数据集训练
-
-1. 将自定义数据集转换为 COCO 格式：
-    ```bash
-    python src/tools/convert_to_coco.py --dataset custom
-    ```
-
-2. 使用与 MOT 数据集相同的步骤进行训练。
+![RepSNet Qualitative Results1](/results/Qualitative_analysis2.png)
 
 ## 引用
 
