@@ -168,13 +168,6 @@ if __name__ == "__main__":
             num_classes=net_args["num_classes"][args.dataset_name],
             deploy=True,
         ).to(args.run_device)
-    elif args.model == "RepSNet_outside":
-        net = RepSNet_outside(
-            img_channel=3,
-            filters=net_args["filters"],
-            num_classes=net_args["num_classes"][args.dataset_name],
-            deploy=False,
-        ).to(args.run_device)
     elif args.model == "HoverNet":
         net = HoVerNetConic(
             num_types=net_args["num_classes"][args.dataset_name],
@@ -191,35 +184,19 @@ if __name__ == "__main__":
             num_input_channels=3,
             num_class=net_args["num_classes"][args.dataset_name],
         ).to(args.run_device)
-    elif args.model == "UNet" or args.model == "ResUNet":
+    elif args.model == "UNet":
         net = UNet(
             channel=3,
             num_classes=net_args["num_classes"][args.dataset_name],
             filters=net_args["filters"],
             ResUNet=args.model == "ResUNet",
         ).to(args.run_device)
-    elif args.model == "MaskRCNN":
-        net = None
-    elif args.model == "RepSNet_noLbq":
-        net = RepSNet_noLbq(
-            img_channel=3,
-            filters=net_args["filters"],
+    elif args.model == "StarDist":
+        net = StarDist(
+            channel=3,
             num_classes=net_args["num_classes"][args.dataset_name],
-            deploy=False,
-        ).to(args.run_device)
-    elif args.model == "RepSNet_noRepUpsample":
-        net = RepSNet_noRepUpsample(
-            img_channel=3,
             filters=net_args["filters"],
-            num_classes=net_args["num_classes"][args.dataset_name],
-            deploy=False,
-        ).to(args.run_device)
-    elif args.model == "RepSNet_noRepVgg":
-        net = RepSNet_noRepVgg(
-            img_channel=3,
-            filters=net_args["filters"],
-            num_classes=net_args["num_classes"][args.dataset_name],
-            deploy=False,
+            ResUNet=args.model == "ResUNet",
         ).to(args.run_device)
 
 # ----------------------------------
