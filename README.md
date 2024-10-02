@@ -112,6 +112,9 @@ The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S
 
 ![RepSNet Qualitative Results1](/results/Qualitative_analysis2.png)
 
+
+## Acknowledgement
+The code is based on [StarDist](https://github.com/stardist/augmend) and [HoVer-Net](https://github.com/vqdang/hover_net). Thanks for their wonderful works.
 ## Citation
 
 <!-- 如果你在研究中使用了我们的工作，请引用以下论文： -->
