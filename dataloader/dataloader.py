@@ -15,11 +15,7 @@ from augmend import Augmend,Identity,Elastic
 
 transforms = A.Compose([
     A.GaussianBlur(p=0.3),
-    # A.MotionBlur(p=0.3),
-    # A.AdditiveNoise(limit=(-0.01, 0.01), per_channel=True, p=0.5),
-    # A.ColorJitter(brightness=0.2,hue=0.05,saturation=0.2,contrast=0.25,p=0.3)
     A.ColorJitter(brightness=0.1,hue=0,saturation=(1,1),p=0.3)
-    # A.OneOf([A.CLAHE(clip_limit=2), A.IAAEmboss()], p=0.3)
     ])
 
 # #########################2023年8月19号
@@ -74,9 +70,7 @@ class dataset(Data.Dataset):
                 img, ann = self.__add_instance_aug(img, ann)
 
             img, ann = self.__img_augmentation(img, ann)
-        ################ 2023 7 25 拉普拉斯增强
-        # img = np.concatenate([img, np.array([cv2.Laplacian(img[:, :, i], cv2.CV_64F, ksize=3) for i in range(3)]).transpose(1, 2, 0)], axis=-1)
-        ################
+
         feed_dict = {
             "img": img.copy(),
             "ann": ann.copy(),
@@ -84,17 +78,11 @@ class dataset(Data.Dataset):
 
         type_map, boundary_distance_map, boundary_map = self.__get_target(ann, dir_mode=4)
 
-        hv_map,center_map = self.__get_hv_map(ann)
-
         feed_dict["type_map"] = type_map.copy()
 
         feed_dict["boundary_distance_map"] = np.sqrt(boundary_distance_map.copy())
 
         feed_dict["boundary_map"] = boundary_map.copy()
-
-        feed_dict["hv_map"] = hv_map.copy()*0.2
-        
-        feed_dict["center_map"] = center_map.copy()
 
 
         return feed_dict
@@ -134,7 +122,6 @@ class dataset(Data.Dataset):
         return img, ann
 
     def __img_augmentation(self, img, ann):
-        # 改变形状
         if np.random.rand() < 0.5:
             k = np.random.randint(1, 4)
             img = np.rot90(img, k=k, axes=(0, 1))
@@ -148,101 +135,12 @@ class dataset(Data.Dataset):
             img = np.flipud(img)
             ann = np.flipud(ann)
 
-        # 目前来说数据增强效果不明显
         if self.with_augs:
             img,ann = aug([img,ann])
-            # augs = img_augs.to_deterministic()
-            # img = augs.augment_image(img)
             img = transforms(image = img)["image"]
-            # [img,ann] = augmenter(img,ann)
 
         return img, ann
 
-    def __get_hv_map(self, ann):
-
-        ann = ann[..., 0].copy()
-
-        x_map = np.zeros(ann.shape[:2], dtype=np.float32)
-        y_map = np.zeros(ann.shape[:2], dtype=np.float32)
-        
-        center_distance = np.dstack([x_map, y_map])
-        center_map = np.zeros(ann.shape[:2],dtype=np.int64)
-
-        inst_list = list(np.unique(ann))
-        inst_list.remove(0)  # 0 is background
-
-        for inst_id in inst_list:
-            inst_map = np.array(ann == inst_id, np.uint16)
-
-            ##根据上下左右四个点拿到第i个细胞核的区域
-            inst_box = get_bounding_box(inst_map)
-
-            inst_map = inst_map[inst_box[0]:inst_box[1], inst_box[2]:inst_box[3]]
-
-            # max = np.max(inst_map)
-            
-            # sum = np.sum(inst_map)//max
-            ##计算质心
-            inst_com = list(measurements.center_of_mass(inst_map))  
-            
-                    ##四舍五入
-            inst_com[0] = int(inst_com[0] + 0.5)  
-            inst_com[1] = int(inst_com[1] + 0.5)
-
-            center_x =inst_box[0]+inst_com[0]
-            center_y =inst_box[2]+inst_com[1]
-
-            center_x =np.clip(center_x,0,254)
-            center_y =np.clip(center_y,0,254)
-
-            center_map[center_x,center_y] = 1
-
-
-            inst_x_range = np.arange(0, inst_map.shape[1] )
-            inst_y_range = np.arange(0, inst_map.shape[0] )
-
-            # shifting center of pixels grid to instance center of mass
-            inst_x_range -= inst_com[1]
-            inst_y_range -= inst_com[0]
-
-            inst_x, inst_y = np.meshgrid(inst_x_range, inst_y_range)
-
-            # remove coord outside of instance
-            inst_x[inst_map == 0] = 0
-            inst_y[inst_map == 0] = 0
-
-            inst_x = inst_x.astype("float32")
-            inst_y = inst_y.astype("float32")
-
-            # normalize min into -1 scale
-            inst_x[inst_x !=0] *= -1  ###水平距离
-
-            inst_y[inst_y !=0] *= -1  ####垂直距离
-        
-
-            x_map_box = x_map[inst_box[0]:inst_box[1], inst_box[2]:inst_box[3]]
-            x_map_box[inst_map > 0] = inst_x[inst_map > 0]
-
-            y_map_box = y_map[inst_box[0]:inst_box[1], inst_box[2]:inst_box[3]]
-            y_map_box[inst_map > 0] = inst_y[inst_map > 0]
-
-            center_distance = np.dstack([x_map, y_map])
-        
-        # dilate = nn.MaxPool2d(kernel_size=(3, 3), stride=1, padding=1)
-        # center_map = torch.tensor(center_map)
-        # center_map = center_map.unsqueeze(0)
-        # center_map = dilate(center_map.type(torch.float).unsqueeze(1)).reshape(1, 256, 256)
-        # center_map =center_map[0].numpy()
-            # radius_outer_1 = 1
-            # radius_outer_2 = 2
-            # cv2.circle(center_map, (center_x, center_y), radius_outer_1, 2, thickness=1)
-            # cv2.circle(center_map, (center_x, center_y), radius_outer_2, 3, thickness=1)
-
-        # cv2.imwrite('center_map.png',center_map)
-        return center_distance ,center_map
-
-
-    # 原来的方法
     def __get_target(self, ann, dir_mode=4):
         inst_map = ann[..., 0]
 
@@ -275,7 +173,6 @@ class dataset(Data.Dataset):
 
         return type_map, boundary_distance_map, boundary_map
 
-    # 2022.10.20
     def __get_boundary_map(self, inst_map, boundary_radius=5, boundary_mode='outside'):
         """
         获取边界map
@@ -320,7 +217,7 @@ class dataloader(object):
     def __init__(
         self,
         dataset_name="CoNIC",  # ['kumar', 'cpm17', 'consep', 'CoNIC', 'PanNuke', 'dsb18]
-        dataset_path="./dataset/unify_dataset/",
+        dataset_path="./dataset/",
         batch_size=8,
         with_augs=False,
         with_instances_aug=False,

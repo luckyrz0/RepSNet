@@ -26,51 +26,43 @@ def inference():
         type_map += torch.softmax(pred["type_map"], dim=1)
         boundary_map += pred["boundary_map"]
         
-        ##########水平翻转
+        ########## flip
         pred = model(batch.flip(-1))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).flip(-1)
         type_map += torch.softmax(pred["type_map"], dim=1).flip(-1)
         boundary_map += pred["boundary_map"].flip(-1)
 
-        ##########上下翻转
-        # pred = model(batch.flip(-2))
-        # nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).flip(-2)
-        # type_map += torch.softmax(pred["type_map"], dim=1).flip(-2)        
-        # boundary_map += pred["boundary_map"].flip(-2)
-        
-       
-
-        ##########旋转90度
+        ##########rot90
         pred = model(batch.rot90(1, [-2, -1]))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).rot90(-1, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).rot90(-1, [-2, -1])
         boundary_map += pred["boundary_map"].rot90(-1, [-2, -1])
 
-        ##########旋转90度 + 水平翻转
+        ##########rot90 + flip
         pred = model(batch.rot90(1, [-2, -1]).flip(-1))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).flip(-1).rot90(-1, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).flip(-1).rot90(-1, [-2, -1])
         boundary_map += pred["boundary_map"].flip(-1).rot90(-1, [-2, -1])
 
-        ##########旋转180度
+        ##########rot180
         pred = model(batch.rot90(2, [-2, -1]))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).rot90(-2, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).rot90(-2, [-2, -1])
         boundary_map += pred["boundary_map"].rot90(-2, [-2, -1])
         
-        ##########旋转180度 + 水平翻转
+        ##########rot180 + flip
         pred = model(batch.rot90(2, [-2, -1]).flip(-1))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).flip(-1).rot90(-2, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).flip(-1).rot90(-2, [-2, -1])
         boundary_map += pred["boundary_map"].flip(-1).rot90(-2, [-2, -1])
 
-        ##########旋转270度
+        ##########rot270
         pred = model(batch.rot90(3, [-2, -1]))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).rot90(-3, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).rot90(-3, [-2, -1])
         boundary_map += pred["boundary_map"].rot90(-3, [-2, -1])
         
-        ##########旋转270度 + 水平翻转
+        ##########rot180 + flip
         pred = model(batch.rot90(3, [-2, -1]).flip(-1))
         nucleus_map += torch.softmax(pred["nucleus_map"], dim=1).flip(-1).rot90(-3, [-2, -1])
         type_map += torch.softmax(pred["type_map"], dim=1).flip(-1).rot90(-3, [-2, -1])
