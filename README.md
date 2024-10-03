@@ -77,9 +77,9 @@ Download the following pre-trained models and place them in the `model_log/` fol
 | local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
 | local_test   | - | - | 0.635 | 0.478  | -->
 
-The RepSNet_lager model 'best_mpq_lager.pth' can be downloaded here: [RepSNet_L](https://drive.google.com/file/d/1082dGUDeGQQwiOxylXmgU5ueArpGs2Ib/view?usp=sharing)
+The RepSNet_lager model 'RepSNet_L.pth' can be downloaded here: [RepSNet_L](https://drive.google.com/file/d/1082dGUDeGQQwiOxylXmgU5ueArpGs2Ib/view?usp=sharing)
 
-The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S](https://drive.google.com/file/d/1beu0ZVwyA4IBmCkqfhHBaGSlocOXezNa/view?usp=drive_link)
+The RepSNet_small model 'RepSNet_S.pth' can be downloaded here:  [RepSNet_S](https://drive.google.com/file/d/1beu0ZVwyA4IBmCkqfhHBaGSlocOXezNa/view?usp=drive_link)
 
 ## Train
 
