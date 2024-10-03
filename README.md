@@ -128,10 +128,10 @@ The code is based on [StarDist](https://github.com/stardist/augmend) and [HoVer-
 If you use our work in your research, please cite the following paper:
 
 ```bibtex
-@article{zhang2020fairmot,
+@article{,
   title={RepSNet: A Nucleus Instance Segmentation model based on
 Boundary Regression and Structural Re-parameterization},
-  author={Zhang, Yifu and Wang, Changhong and Wang, Xiaogang and Liu, Wei},
-  journal={arXiv preprint arXiv:2004.01888},
-  year={2020}
+  author={},
+  journal={},
+  year={2024}
 }
