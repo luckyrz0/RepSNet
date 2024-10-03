@@ -60,11 +60,18 @@ RepSNet proposes a simple and effective method for nucleus instance segmentation
    dataset/
             └── CoNIC/
     ```
+2. Use the methods in the augmend folder for data augmentation, including oversampling, contrast enhancement, elastic deformation, etc.
+    ```
+   augmend/
+            └── oversampling.py
+            └── transforms/
+    ```
+
 
 ## Pretrained models
 
 <!-- 下载以下预训练模型，并将其放置在 `model_log/` 文件夹下： -->
-Download the following pre-trained models and place them in the `model_log/` folder:
+Download the following pre-trained models and place them in the `model_log/` folder.
 <!-- | Test         | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
 | local_test   | 0.672 | 0.837 | 0.641 | 0.539 |
@@ -110,7 +117,7 @@ The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S
 
 ![RepSNet Qualitative Results1](/results/Qualitative_analysis1.png)
 
-![RepSNet Qualitative Results1](/results/Qualitative_analysis2.png)
+<!-- ![RepSNet Qualitative Results1](/results/Qualitative_analysis2.png) -->
 
 
 ## Acknowledgement
