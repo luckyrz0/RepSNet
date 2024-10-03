@@ -79,7 +79,7 @@ Download the following pre-trained models and place them in the `model_log/` fol
 
 The RepSNet_lager model 'best_mpq_lager.pth' can be downloaded here: [RepSNet_L](https://drive.google.com/file/d/1082dGUDeGQQwiOxylXmgU5ueArpGs2Ib/view?usp=sharing)
 
-The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S](https://github.com/ifzhang/FairMOT/releases/download/v1.0/dla34.pth)
+The RepSNet_lager model 'best_mpq_samll.pth' can be downloaded here:  [RepSNet_S](https://drive.google.com/file/d/1beu0ZVwyA4IBmCkqfhHBaGSlocOXezNa/view?usp=drive_link)
 
 ## Train
 
