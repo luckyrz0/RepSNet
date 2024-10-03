@@ -193,10 +193,7 @@ if __name__ == "__main__":
         ).to(args.run_device)
     elif args.model == "StarDist":
         net = StarDist(
-            channel=3,
-            num_classes=net_args["num_classes"][args.dataset_name],
-            filters=net_args["filters"],
-            ResUNet=args.model == "ResUNet",
+            n_channels=3,
         ).to(args.run_device)
 
 # ----------------------------------
