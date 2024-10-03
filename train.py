@@ -16,7 +16,7 @@ from torch.utils.tensorboard import SummaryWriter
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--data_path', type=str, default="/dataset/CoNIC", help='The path of the data set.')
-parser.add_argument('--model', choices=['RepSNet', 'RepSNet_deploy', 'HoverNet', 'DCAN', 'MicroNet', 'ResUNet', 'UNet', 'MaskRCNN', 'RepSNet_noLbq', 'RepSNet_noRepUpsample', 'RepSNet_noRepVgg', 'RepSNet_outside'], default='RepSNet', help='The model to be used for training.')
+parser.add_argument('--model', choices=['RepSNet_L', 'RepSNet_S', 'HoverNet', 'DCAN', 'MicroNet', 'ResUNet', 'UNet', 'MaskRCNN', 'RepSNet_noLbq', 'RepSNet_noRepUpsample', 'RepSNet_noRepVgg', 'RepSNet_outside'], default='RepSNet', help='The model to be used for training.')
 parser.add_argument('--dataset_name', choices=['kumar', 'cpm17', 'consep', 'CoNIC', 'PanNuke', 'dsb18'], default="CoNIC", help='The name of the data set.')
 parser.add_argument('--log_path', type=str, default='./model_log/', help='The path to save the model data after training.')
 parser.add_argument('--batch_size', type=int, default=4, help='The size of the batch.')
@@ -155,14 +155,14 @@ if __name__ == "__main__":
 
     # 选择的模型
     if args.model == "RepSNet":
-        net = RepSNet(
+        net = RepSNet_L(
             img_channel=3,
             filters=net_args["filters"],
             num_classes=net_args["num_classes"][args.dataset_name],
             deploy=False,
         ).to(args.run_device)
-    elif args.model == "RepSNet_deploy":
-        net = RepSNet(
+    elif args.model == "RepSNet_S":
+        net = RepSNet_S(
             img_channel=3,
             filters=net_args["filters"],
             num_classes=net_args["num_classes"][args.dataset_name],

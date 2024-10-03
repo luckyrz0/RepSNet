@@ -20,7 +20,7 @@ RepSNet proposes a simple and effective method for nucleus instance segmentation
 - 2020/04/22: 发布了 FairMOT 初版代码
 - 2020/06/10: 更新了自定义挑战数据集上的性能表现 -->
 
-## Test performance
+## Test the performance on CoNIC([download CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) test set
 
 | Test set      | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
