@@ -79,7 +79,7 @@ Download the following pre-trained models and place them in the `model_log/` fol
 
 The RepSNet_lager model 'RepSNet_L.pth' can be downloaded here: [RepSNet_L](https://drive.google.com/file/d/1082dGUDeGQQwiOxylXmgU5ueArpGs2Ib/view?usp=sharing)
 
-The RepSNet_small model 'RepSNet_S.pth' can be downloaded here:  [RepSNet_S](https://drive.google.com/file/d/1beu0ZVwyA4IBmCkqfhHBaGSlocOXezNa/view?usp=drive_link)
+The RepSNet_small model 'RepSNet_S.pth' can be downloaded here:  [RepSNet_S](https://drive.google.com/file/d/18lhFa5bRXi3WFBwHJap2Q9m365FX93Wu/view?usp=drive_link)
 
 ## Train
 
