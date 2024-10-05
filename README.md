@@ -20,7 +20,7 @@ RepSNet proposes a simple and effective method for nucleus instance segmentation
 - 2020/04/22: 发布了 FairMOT 初版代码
 - 2020/06/10: 更新了自定义挑战数据集上的性能表现 -->
 
-## Test the performance on CoNIC([download CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) test set
+## Test the performance on CoNIC([download CoNIC](https://drive.google.com/file/d/1fiUjPj3lS1UjKgzTwJ5A8iG1NNKJ6VG8/view?usp=drive_link)) test set
 
 | Test set      | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
@@ -55,7 +55,7 @@ RepSNet proposes a simple and effective method for nucleus instance segmentation
 ## Data preparation
 
 <!-- 1. 下载 CoNIC 数据集 ([CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) 并放置在 `datasets` 目录下: -->
-1. Download the CoNIC([download CoNIC](https://github.com/TissueImageAnalytics/CoNIC)) dataset and place it in the datasets directory.
+1. Download the CoNIC([download CoNIC](https://drive.google.com/file/d/1fiUjPj3lS1UjKgzTwJ5A8iG1NNKJ6VG8/view?usp=drive_link)) dataset and place it in the datasets directory.
     ```
    dataset/
             └── CoNIC/
