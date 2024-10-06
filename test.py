@@ -1,4 +1,4 @@
-from models.RepSNet_L import RepSNet, model_convert
+from models.RepSNet_S import RepSNet, model_convert
 import numpy as np
 import torch
 
