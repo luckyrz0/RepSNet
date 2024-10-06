@@ -24,7 +24,7 @@ RepSNet proposes a simple and effective method for nucleus instance segmentation
 
 | Test set      | AJI | DICE | PQ | mPQ  |
 |--------------|------|------|-----|------|
-| local test set  | 0.672 | 0.837 | 0.641 | 0.539 |
+| local test set  | 0.683 | 0.841 | 0.641 | 0.563 |
 | online test set | - | - | 0.635 | 0.478  |
 
 **AJI**: Aggregated Jaccard Index, assesses the overlap between the segmentation and ground truth.  

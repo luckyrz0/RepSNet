@@ -6,8 +6,6 @@ import torch.nn.functional as F
 from scipy.ndimage import label,binary_fill_holes
 from scipy import ndimage
 
-
-# https://nenadmarkus.com/p/fusing-batchnorm-and-conv/
 def conv_bn(in_channels, out_channels, kernel_size, stride, padding):
     result = nn.Sequential()
     result.add_module(
@@ -362,7 +360,6 @@ class RepSNet_S(nn.Module):
             type_map = self.type_map(x1) 
         boundary_distance_map = self.boundary_distance_map(x2) 
         
-        # 屏蔽非细胞核的距离回归，效果一般，但是能够提高收敛速度
         temp_map = torch.argmax(nucleus_map, dim=1).type(torch.long).detach()
         boundary_distance_map = boundary_distance_map * temp_map.unsqueeze(1)  
 
@@ -382,12 +379,11 @@ class RepSNet_S(nn.Module):
     def __get_boundary_map(self, nucleus_map, boundary_distance_map):
         "获取核边界"
         B, N, H, W = boundary_distance_map.size()
-        #device = boundary_distance_map.device
 
         # 将细胞核的边界加入了边界特征图中，并且进行训练
         nucleus_map = torch.argmax(nucleus_map, dim=1)
-        nucleus_map_erode = -self.dilate(-nucleus_map.type(torch.float).unsqueeze(1)).reshape(B,H,W)  # 这个的作用是吧边界变成0，其它不变。具体说：全部像素变成-1，再作最大池化，使细胞核向内收缩一圈，使边界变成0
-        boundary_map = (nucleus_map - nucleus_map_erode)  # 因为上一步把边界变成0了，所以这里减了之后只剩下边界 #8*256*256
+        nucleus_map_erode = -self.dilate(-nucleus_map.type(torch.float).unsqueeze(1)).reshape(B,H,W)  
+        boundary_map = (nucleus_map - nucleus_map_erode) 
 
         # 核像素索引 tuple(B,H,W)
         nucleus_mask_index = torch.where(nucleus_map > 0)
@@ -598,10 +594,6 @@ class RepSNet_S(nn.Module):
 
             for invalid_instance in instance_map_unique[instance_map_count > instance_threshold[1]]:
                 instance_map[instance_map == invalid_instance] = 0
-
-            ################### 2023 07 20 二段自适应阈值 add
-            # instance_map_save = np.copy(instance_map)
-            ###################
 
             X_instance_index = np.vstack(np.where(instance_map != 0)).T
             Y_instance = instance_map[X_instance_index[:, 0], X_instance_index[:, 1]]

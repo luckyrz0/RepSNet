@@ -8,7 +8,6 @@ from dropblock import DropBlock2D, LinearScheduler
 import torchvision
 from collections import OrderedDict
 
-# https://nenadmarkus.com/p/fusing-batchnorm-and-conv/
 def conv_bn(in_channels, out_channels, kernel_size, stride, padding):
     result = nn.Sequential()
     result.add_module('conv', nn.Conv2d(in_channels=in_channels, out_channels=out_channels, kernel_size=kernel_size,
@@ -180,10 +179,6 @@ class Encoder(nn.Module):
     def __init__(self, input_channel, filters, deploy=False):
         super(Encoder, self).__init__()
 
-        # self.downsample_1 = nn.Sequential(RepVggUnit(input_channel, filters[0], stride=1, deploy=deploy), RepVggUnit(filters[0], filters[0], stride=1, deploy=deploy))
-        # self.downsample_2 = nn.Sequential(RepVggUnit(filters[0], filters[1], stride=1, deploy=deploy), RepVggUnit(filters[1], filters[1], stride=2, deploy=deploy), RepVggUnit(filters[1], filters[1], stride=1, deploy=deploy))
-        # self.downsample_3 = nn.Sequential(RepVggUnit(filters[1], filters[2], stride=1, deploy=deploy), RepVggUnit(filters[2], filters[2], stride=2, deploy=deploy), RepVggUnit(filters[2], filters[2], stride=1, deploy=deploy))
-        # self.downsample_4 = nn.Sequential(RepVggUnit(filters[2], filters[3], stride=1, deploy=deploy), RepVggUnit(filters[3], filters[3], stride=2, deploy=deploy), RepVggUnit(filters[3], filters[3], stride=1, deploy=deploy))
         self.downsample_0 = nn.Sequential(RepVggUnit(input_channel, filters[0], stride=1, deploy=deploy),
                                           RepVggUnit(filters[0], filters[0], stride=1, deploy=deploy))
 
