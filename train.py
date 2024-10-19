@@ -236,28 +236,4 @@ if __name__ == "__main__":
         lr_scheduler.step(valid_loss)
         # 评估模型
         metrics = compute_stats(other_info["pred_array"], other_info["true_array"], net_args["num_classes"][args.dataset_name])
-        # lr_scheduler.step(metrics["mpq"])
-
-        for key in metrics.keys():
-            writer.add_scalar('metrics/%s' % key, metrics[key], epoch)
-
-        if epoch == 16:
-            convert_net = model_convert(net, do_copy=True)
-            torch.save(convert_net.state_dict(), args.log_path + model_name + '/weight_epoch16.pkl')
-            torch.save(net.state_dict(), args.log_path + model_name + '/weight_epoch16_noconvert.pkl')
-        # 保存模型
-        if args.model == "RepSNet" or args.model == "RepSNet_noLbq" or args.model == "RepSNet_noRepUpsample":
-            convert_net = model_convert(net, do_copy=True)
-        else:
-            convert_net = net
-        torch.save(convert_net.state_dict(), args.log_path + model_name + '/weight_temp.pkl')
-        
-        if valid_loss < best_loss:
-            torch.save(convert_net.state_dict(), args.log_path + model_name + '/weight_best.pkl')
-            best_loss = valid_loss
-            pickle.dump(other_info, open(args.log_path + model_name + '/other_info.pkl', 'wb'))
-
-        if metrics['mpq'] > best_mpq:
-            torch.save(convert_net.state_dict(), args.log_path + model_name + '/best_mpq.pkl')
-            best_mpq = metrics['mpq']
-            pickle.dump(other_info, open(args.log_path + model_name + '/other_info.pkl', 'wb'))
+       
